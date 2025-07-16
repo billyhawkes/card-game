@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://b3utiauum1040"]
 
-[ext_resource type="Theme" uid="uid://ui7apxl85t3v" path="res://interface/theme.tres" id="1_06t4h"]
+[ext_resource type="Theme" uid="uid://ui7apxl85t3v" path="res://interface/theme.tres" id="1_xqga4"]
 
 [node name="CanvasLayer" type="CanvasLayer"]
 
@@ -28,5 +28,5 @@ grow_vertical = 2
 
 [node name="Button" type="Button" parent="Control/VBoxContainer"]
 layout_mode = 2
-theme = ExtResource("1_06t4h")
+theme = ExtResource("1_xqga4")
 text = "Start Game"

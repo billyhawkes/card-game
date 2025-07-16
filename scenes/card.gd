@@ -31,7 +31,7 @@ func _ready() -> void:
 	value_label.text = label()
 	level_label.text = "Level " + str(level)
 	hand_container = get_parent()
-	card_manager = get_tree().root.get_child(0).get_child(0)
+	card_manager = get_tree().root.find_child("$CardManager")
 	
 static func create_card(_type: CardType, _level: int, _card_id: int) -> Card:
 	var new_card: Card = CARD.instantiate()
@@ -70,9 +70,9 @@ func card_action(score: float) -> float:
 		CardType.Upgrade:
 			var cards = hand_container.get_children() as Array[Card]
 			var index = cards.find(self)
-			var next_card = cards[index + 1]
-			print(next_card.card_id)
-			if next_card:
+			
+			if len(cards) < index + 1:
+				var next_card = cards[index + 1]
 				card_manager.upgrade_card(next_card.card_id)
 			return score
 		_:

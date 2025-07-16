@@ -1,0 +1,62 @@
+[gd_scene load_steps=3 format=3 uid="uid://bq7a13i1dlyv6"]
+
+[ext_resource type="Script" uid="uid://mgsxiolxu1cb" path="res://scenes/menus/end_menu.gd" id="1_cgki5"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5dnv4"]
+bg_color = Color(0.490196, 0.603922, 0.803922, 0.682353)
+
+[node name="EndMenu" type="Control"]
+process_mode = 3
+z_index = 100
+custom_minimum_size = Vector2(1080, 600)
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_cgki5")
+
+[node name="Background" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_5dnv4")
+
+[node name="Panel" type="Panel" parent="Background"]
+custom_minimum_size = Vector2(1080, 600)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -540.0
+offset_top = -50.0
+offset_right = 540.0
+offset_bottom = 50.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="Background/Panel"]
+custom_minimum_size = Vector2(1080, 580)
+layout_mode = 0
+offset_right = 1080.0
+offset_bottom = 579.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Background/Panel/CenterContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Background/Panel/CenterContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 130
+text = "Game Over"
+
+[node name="RestartButton" type="Button" parent="Background/Panel/CenterContainer/VBoxContainer"]
+layout_mode = 2
+text = "Restart"
+
+[connection signal="pressed" from="Background/Panel/CenterContainer/VBoxContainer/RestartButton" to="." method="_on_restart_button_pressed"]

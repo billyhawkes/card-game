@@ -1,7 +1,5 @@
 extends Node2D
 
-signal end_game
-
 # ROUND MANAGEMENT
 @onready var round_label: Label = %RoundLabel
 @onready var points_label: Label = %PointsLabel
@@ -31,7 +29,7 @@ func _on_play_button_pressed() -> void:
 		round = max_rounds
 		stage += 1
 	elif round == 0:
-		end_game.emit()
+		Game.game_lost()
 	
 	card_manager.refresh_hand()
 	render_labels()

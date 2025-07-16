@@ -47,7 +47,8 @@ func refresh_hand() -> void:
 				var id = discard.pop_front()
 				deck.append(id)
 				deck.shuffle()
-		hand.append(card_id)
+		else:
+			hand.append(card_id)
 	
 	for child in hand_container.get_children():
 		hand_container.remove_child(child)
