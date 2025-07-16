@@ -49,7 +49,7 @@ func _process(delta: float) -> void:
 func handle_drag(delta: float) -> void:
 	if (is_over or is_dragging) and (card_container.dragging_card == null or card_container.dragging_card == self):
 		if Input.is_action_pressed("click"):
-			self.z_index = 100
+			self.z_index = 1000
 			
 			# Reorder on hover
 			var closest_index = card_container.get_closest_position_to_cursor()
