@@ -7,8 +7,8 @@ var card_size = 256
 func get_resting_positions() -> Array[Vector2]:
 	var num_cards = get_child_count()
 	var positions: Array[Vector2] = []
-	for position in num_cards:
-		positions.append(Vector2(((global_position.x - (position * -(card_size + 20))) - card_size * num_cards / 2) - num_cards / 2 * 20, global_position.y))
+	for pos in num_cards:
+		positions.append(Vector2(((global_position.x - (pos * -(card_size + 20))) - card_size * num_cards / 2) - num_cards / 2 * 20, global_position.y))
 	return positions
 
 func get_resting_position(card: Card) -> Vector2:
@@ -35,7 +35,7 @@ func get_closest_position_to_cursor() -> int:
 
 func calculate_hand() -> float:
 	var cards = get_children()
-	var score := 0
+	var score: float = 0.0
 	for card in cards:
 		score = card.card_action(score)
 	return score
