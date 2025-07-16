@@ -74,5 +74,4 @@ func calculate_hand() -> float:
 	return score
 
 func upgrade_card(id: int) -> void:
-	print("UPGRADE")
 	cards[id].level += 1
