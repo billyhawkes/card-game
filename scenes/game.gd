@@ -6,7 +6,7 @@ var deck: Array[int] = []
 var discard: Array[int] = []
 var hand: Array[int] = []
 
-@onready var hand_container: HBoxContainer = %HandContainer
+@onready var hand_container: Container = %HandContainer
 const CARD = preload("res://scenes/card.tscn")
 
 func _ready() -> void:

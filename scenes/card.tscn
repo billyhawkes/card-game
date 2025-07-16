@@ -12,6 +12,7 @@ script = ExtResource("1_d81rb")
 level = 1
 
 [node name="Panel" type="Panel" parent="."]
+layout_mode = 0
 offset_right = 256.0
 offset_bottom = 256.0
 
@@ -36,3 +37,6 @@ horizontal_alignment = 1
 
 [node name="LevelLabel" type="Label" parent="Panel/VBoxContainer"]
 layout_mode = 2
+
+[connection signal="mouse_entered" from="Panel" to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Panel" to="." method="_on_mouse_exited"]
