@@ -32,3 +32,10 @@ func get_closest_position_to_cursor() -> int:
 				closest_distance = distance
 				closest_index = index
 	return closest_index
+
+func calculate_hand() -> float:
+	var cards = get_children()
+	var score := 0
+	for card in cards:
+		score = card.card_action(score)
+	return score

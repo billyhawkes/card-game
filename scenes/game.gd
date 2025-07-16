@@ -1,13 +1,13 @@
 extends Node2D
 
 var cards: Array[Card] = []
-
 var deck: Array[int] = []
 var discard: Array[int] = []
 var hand: Array[int] = []
 
 @onready var hand_container: Container = %HandContainer
 const CARD = preload("res://scenes/card.tscn")
+@onready var points_label: Label = %PointsLabel
 
 func _ready() -> void:
 	# TODO: Load cards from storage
@@ -53,9 +53,19 @@ func refresh_hand():
 		"Discard: ", discard, "\n",
 		"Hand: ", hand, "\n",
 	)
-	
-	
 
 
-func _on_refresh_button_pressed() -> void:
+# ROUND MANAGEMENT
+
+var round := 1
+var num_hands := 5
+var points := 0.0
+var round_goal := 100
+
+func _on_play_button_pressed() -> void:
+	var score = hand_container.calculate_hand()
+	round += 1
+	points += score
+	points_label.text = str(points)
 	refresh_hand()
+	

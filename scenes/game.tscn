@@ -22,6 +22,13 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 20
 
+[node name="PointsLabel" type="Label" parent="CanvasLayer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 144
+text = "0"
+
 [node name="HandContainer" type="Container" parent="CanvasLayer/VBoxContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 256)
@@ -30,9 +37,9 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 script = ExtResource("2_yqjtg")
 
-[node name="RefreshButton" type="Button" parent="CanvasLayer/VBoxContainer"]
+[node name="PlayButton" type="Button" parent="CanvasLayer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
-text = "Refresh"
+text = "Play"
 
-[connection signal="pressed" from="CanvasLayer/VBoxContainer/RefreshButton" to="." method="_on_refresh_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/VBoxContainer/PlayButton" to="." method="_on_play_button_pressed"]

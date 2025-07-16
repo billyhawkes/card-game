@@ -43,6 +43,15 @@ func label() -> String:
 		_:
 			return ""
 
+func card_action(score: float) -> float:
+	match type:
+		CardType.Add:
+			return score + level
+		CardType.Multiply:
+			return score * level
+		_:
+			return score
+
 func _process(delta: float) -> void:
 	handle_drag(delta)
 	
