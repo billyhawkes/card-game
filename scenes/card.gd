@@ -13,7 +13,6 @@ var card_id: int
 
 @onready var value_label: Label = $Panel/VBoxContainer/ValueLabel
 @onready var level_label: Label = $Panel/VBoxContainer/LevelLabel
-@onready var card_manager: Node2D = %CardManager
 
 const CARD = preload("res://scenes/card.tscn")
 
@@ -31,7 +30,6 @@ func _ready() -> void:
 	value_label.text = label()
 	level_label.text = "Level " + str(level)
 	hand_container = get_parent()
-	card_manager = get_tree().current_scene.find_child("CardManager")
 	
 static func create_card(_type: CardType, _level: int, _card_id: int) -> Card:
 	var new_card: Card = CARD.instantiate()
@@ -73,7 +71,7 @@ func card_action(score: float) -> float:
 			
 			if len(cards) > index + 1:
 				var next_card = cards[index + 1]
-				card_manager.upgrade_card(next_card.card_id)
+				EventBus.upgrade_card.emit(next_card.card_id)
 			return score
 		_:
 			return score

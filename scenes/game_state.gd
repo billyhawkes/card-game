@@ -1,19 +1,30 @@
 extends Node2D
 
+@onready var hand_container: Container = %HandContainer
+const CARD = preload("res://scenes/card.tscn")
 
-# Card Management
+var stage := 1
+var max_rounds := 5
+var rounds := max_rounds
+var points := 0.0
+var points_goal := 10.0
+
 var cards: Array[Card] = []
 var deck: Array[int] = []
 var discard: Array[int] = []
 var hand: Array[int] = []
 
-@onready var hand_container: Container = %HandContainer
-const CARD = preload("res://scenes/card.tscn")
-@onready var discard_label: Label = %DiscardLabel
-@onready var deck_label: Label = %DeckLabel
-@onready var deck_menu: Control = %DeckMenu
-
 func _ready() -> void:
+	EventBus.play_hand.connect(_on_play_hand)
+	EventBus.upgrade_card.connect(_on_upgrade_card)
+	
+	load_cards()
+	refresh_hand()
+
+func _on_upgrade_card(card_id: int) -> void:
+	cards[card_id].level += 1
+
+func load_cards() -> void:
 	# TODO: Load cards from storage
 	for x in 10:
 		var card: Card
@@ -29,8 +40,6 @@ func _ready() -> void:
 	for index in len(cards):
 		deck.append(index)
 	deck.shuffle()
-	
-	refresh_hand()
 
 # Algorithm
 # 1. hand to discard
@@ -57,22 +66,31 @@ func refresh_hand() -> void:
 		var card = cards[card_id]
 		var card_scene = Card.create_card(card.type, card.level, card.card_id)
 		hand_container.add_child(card_scene)
-		
-	deck_label.text = "Deck: " + str(len(deck))
-	discard_label.text = "Discard: " + str(len(discard))
 	
-	print(
-		"Deck: ",deck, "\n",
-		"Discard: ", discard, "\n",
-		"Hand: ", hand, "\n",
-	)
+	EventBus.deck_updated.emit(len(deck))
+	EventBus.discard_updated.emit(len(discard))
 
 func calculate_hand() -> float:
-	var cards = hand_container.get_children()
+	var hand_cards = hand_container.get_children()
 	var score: float = 0.0
-	for card in cards:
+	for card in hand_cards:
 		score = card.card_action(score)
 	return score
 
-func upgrade_card(id: int) -> void:
-	cards[id].level += 1
+func _on_play_hand() -> void:
+	var score = calculate_hand()
+	rounds -= 1
+	points += score
+	if points >= points_goal:
+		points = 0
+		points_goal = points_goal * 1.5
+		rounds = max_rounds
+		stage += 1
+	elif rounds == 0:
+		EventBus.game_lost.emit()
+	
+	EventBus.points_updated.emit(points)
+	EventBus.round_updated.emit(rounds)
+	EventBus.stage_updated.emit(stage)
+	
+	refresh_hand()
