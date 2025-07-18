@@ -12,7 +12,7 @@ func _ready() -> void:
 	EventBus.round_updated.connect(func(new): round_label.text = "Round: " + str(new))
 	EventBus.goal_updated.connect(func(new): goal_label.text = "Goal: " + str(new))
 	EventBus.discard_updated.connect(func(new): discard_label.text = "Discard: " + str(new))
-	EventBus.deck_updated.connect(func(new): deck_label.text = "Deck: " + str(new))
+	EventBus.stage_updated.connect(func(new): stage_label.text = "Stage: " + str(new))
 	EventBus.points_updated.connect(func(new): points_label.text = str(new))
 
 

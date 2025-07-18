@@ -1,4 +1,5 @@
 extends Node2D
+class_name GameState
 
 @onready var hand_container: Container = %HandContainer
 const CARD = preload("res://scenes/card.tscn")
@@ -92,5 +93,6 @@ func _on_play_hand() -> void:
 	EventBus.points_updated.emit(points)
 	EventBus.round_updated.emit(rounds)
 	EventBus.stage_updated.emit(stage)
+	EventBus.goal_updated.emit(points_goal)
 	
 	refresh_hand()

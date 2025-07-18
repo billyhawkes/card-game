@@ -21,9 +21,10 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="DeckMenu" parent="CanvasLayer/Menus" instance=ExtResource("3_iywne")]
+[node name="DeckMenu" parent="CanvasLayer/Menus" node_paths=PackedStringArray("game_state") instance=ExtResource("3_iywne")]
 visible = false
 layout_mode = 1
+game_state = NodePath("../../../GameState")
 
 [node name="EndMenu" parent="CanvasLayer/Menus" instance=ExtResource("4_p57ef")]
 visible = false
@@ -62,7 +63,7 @@ text = "Round: 1"
 [node name="GoalLabel" type="Label" parent="CanvasLayer/HUD/Header"]
 unique_name_in_owner = true
 layout_mode = 2
-text = "Goal: 10"
+text = "Goal: 10.0"
 
 [node name="PointsLabel" type="Label" parent="CanvasLayer/HUD"]
 unique_name_in_owner = true
