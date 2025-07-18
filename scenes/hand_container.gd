@@ -22,7 +22,8 @@ func get_closest_position_to_cursor() -> int:
 	var closest_distance = null
 	var resting_positions = get_resting_positions()
 	for index in len(resting_positions):
-		var distance = get_global_mouse_position().distance_to(Vector2(position.x + card_size / 2.0, position.y + card_size / 2.0))
+		var pos = resting_positions[index]
+		var distance = get_global_mouse_position().distance_to(Vector2(pos.x + card_size / 2.0, pos.y + card_size / 2.0))
 		if closest_index == null:
 			closest_distance = distance
 			closest_index = index
