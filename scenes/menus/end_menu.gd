@@ -1,7 +1,7 @@
 extends Control
 
 func _ready() -> void:
-	EventBus.game_lost.connect(_open_end_menu)
+	EventBus.stage_lost.connect(_open_end_menu)
 	
 func _open_end_menu() -> void:
 	get_tree().paused = true

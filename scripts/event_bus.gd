@@ -1,6 +1,8 @@
 extends Node2D
 
-signal game_lost
+# Game
+signal stage_lost
+signal stage_complete
 
 # HUD
 signal play_hand

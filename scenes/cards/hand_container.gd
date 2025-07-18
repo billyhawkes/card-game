@@ -1,7 +1,7 @@
 extends Container
 class_name HandContainer
 
-var dragging_card: Card = null
+var dragging_card: HandCard = null
 var card_size = 256
 	
 func get_resting_positions() -> Array[Vector2]:
@@ -11,7 +11,7 @@ func get_resting_positions() -> Array[Vector2]:
 		positions.append(Vector2(((global_position.x - (pos * -(card_size + 20.0))) - card_size * num_cards / 2.0) - num_cards / 2.0 * 20.0, global_position.y))
 	return positions
 
-func get_resting_position(card: Card) -> Vector2:
+func get_resting_position(card: HandCard) -> Vector2:
 	var pos = get_children().find(card)
 	var num_cards = get_child_count()
 	var parent_x = global_position.x

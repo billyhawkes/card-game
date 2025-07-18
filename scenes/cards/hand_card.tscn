@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://bhru0ebx6pvmn"]
+
+[ext_resource type="Script" uid="uid://cgcoj3cn8mupm" path="res://scenes/cards/hand_card.gd" id="1_1bxcp"]
+[ext_resource type="PackedScene" uid="uid://dvxlpi73wqwec" path="res://scenes/cards/card.tscn" id="1_7pbla"]
+
+[node name="HandCard" type="Control"]
+custom_minimum_size = Vector2(256, 256)
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_1bxcp")
+
+[node name="Card" parent="." instance=ExtResource("1_7pbla")]
+
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

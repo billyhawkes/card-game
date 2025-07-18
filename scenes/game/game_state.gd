@@ -1,45 +1,30 @@
-extends Node2D
-class_name GameState
+extends CanvasLayer
 
 @onready var hand_container: Container = %HandContainer
 
-var stage := 1
-var max_rounds := 5
-var rounds := max_rounds
-var points := 0.0
-var points_goal := 10.0
+var rounds: int
+var points: float
+var points_goal: float
 
-var cards: Array[Card] = []
 var deck: Array[int] = []
 var discard: Array[int] = []
 var hand: Array[int] = []
 
 func _ready() -> void:
 	EventBus.play_hand.connect(_on_play_hand)
-	EventBus.upgrade_card.connect(_on_upgrade_card)
 	
-	load_cards()
-	refresh_hand()
-
-func _on_upgrade_card(card_id: int) -> void:
-	cards[card_id].level += 1
-
-func load_cards() -> void:
-	# TODO: Load cards from storage
-	for x in 10:
-		var card: Card
-		if x < 7:
-			card = Card.new(Card.CardType.Add, 1, x)
-		elif x < 9:
-			card = Card.new(Card.CardType.Multiply, 1, x)
-		else:
-			card = Card.new(Card.CardType.Upgrade, 1, x)
-		cards.append(card)
-
+	rounds = Game.max_rounds
+	points = 0.0
+	points_goal = Game.get_points_goal()
+	print(rounds, points, points_goal)
+	
 	# Fill deck randomly (Should happen at start of round)
-	for index in len(cards):
+	for index in len(Game.cards):
 		deck.append(index)
 	deck.shuffle()
+	
+	refresh_hand()
+	
 
 # Algorithm
 # 1. hand to discard
@@ -63,8 +48,8 @@ func refresh_hand() -> void:
 	for child in hand_container.get_children():
 		hand_container.remove_child(child)
 	for card_id in hand:
-		var card = cards[card_id]
-		var card_scene = Card.create_card(card.type, card.level, card.card_id)
+		var card = Game.cards[card_id]
+		var card_scene = HandCard.create_card(card.card_id)
 		hand_container.add_child(card_scene)
 	
 	EventBus.deck_updated.emit(len(deck))
@@ -82,16 +67,12 @@ func _on_play_hand() -> void:
 	rounds -= 1
 	points += score
 	if points >= points_goal:
-		points = 0
-		points_goal = points_goal * 1.5
-		rounds = max_rounds
-		stage += 1
+		EventBus.stage_complete.emit()
 	elif rounds == 0:
-		EventBus.game_lost.emit()
+		EventBus.stage_lost.emit()
 	
 	EventBus.points_updated.emit(points)
 	EventBus.round_updated.emit(rounds)
-	EventBus.stage_updated.emit(stage)
 	EventBus.goal_updated.emit(points_goal)
 	
 	refresh_hand()

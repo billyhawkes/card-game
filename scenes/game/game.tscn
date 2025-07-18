@@ -1,0 +1,105 @@
+[gd_scene load_steps=6 format=3 uid="uid://b8upd5s60o0j6"]
+
+[ext_resource type="Script" uid="uid://cmsh4jlfgpcsl" path="res://scenes/game/game_state.gd" id="1_lfrn8"]
+[ext_resource type="PackedScene" uid="uid://k7sgc6jfye7m" path="res://scenes/menus/deck_menu.tscn" id="2_5i0tg"]
+[ext_resource type="PackedScene" uid="uid://bq7a13i1dlyv6" path="res://scenes/menus/end_menu.tscn" id="3_bdhmt"]
+[ext_resource type="Script" uid="uid://p1nhil2wcyhh" path="res://scenes/game/hud.gd" id="4_87uf6"]
+[ext_resource type="Script" uid="uid://dq1ffuvjirpbu" path="res://scenes/cards/hand_container.gd" id="5_2a8rs"]
+
+[node name="Game" type="CanvasLayer"]
+script = ExtResource("1_lfrn8")
+
+[node name="Menus" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="DeckMenu" parent="Menus" instance=ExtResource("2_5i0tg")]
+visible = false
+layout_mode = 1
+
+[node name="EndMenu" parent="Menus" instance=ExtResource("3_bdhmt")]
+visible = false
+layout_mode = 1
+
+[node name="HUD" type="VBoxContainer" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -361.5
+offset_top = -401.5
+offset_right = 361.5
+offset_bottom = 401.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 20
+script = ExtResource("4_87uf6")
+
+[node name="Header" type="HBoxContainer" parent="HUD"]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="StageLabel" type="Label" parent="HUD/Header"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Stage: 1"
+
+[node name="RoundLabel" type="Label" parent="HUD/Header"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Round: 1"
+
+[node name="GoalLabel" type="Label" parent="HUD/Header"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Goal: 10.0"
+
+[node name="PointsLabel" type="Label" parent="HUD"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 250
+text = "0"
+
+[node name="HandContainer" type="Container" parent="HUD"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 256)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("5_2a8rs")
+
+[node name="Footer" type="HBoxContainer" parent="HUD"]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="DiscardLabel" type="Label" parent="HUD/Footer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Discard: 5"
+
+[node name="PlayButton" type="Button" parent="HUD/Footer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Play"
+
+[node name="DeckButton" type="Button" parent="HUD/Footer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Deck"
+
+[node name="DeckLabel" type="Label" parent="HUD/Footer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Deck: 5"
+
+[connection signal="pressed" from="HUD/Footer/PlayButton" to="HUD" method="_on_play_button_pressed"]
+[connection signal="pressed" from="HUD/Footer/DeckButton" to="HUD" method="_on_deck_button_pressed"]

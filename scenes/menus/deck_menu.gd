@@ -1,6 +1,5 @@
 extends Control
 
-@export var game_state: GameState
 @onready var card_container: FlowContainer = %CardContainer
 
 func _ready() -> void:
@@ -8,7 +7,7 @@ func _ready() -> void:
 	
 func _open_deck_menu() -> void:
 	get_tree().paused = true
-	for card in game_state.cards:
+	for card in Game.cards:
 		print(card.type, card.card_id)
 		var new_card = Card.create_card(card.type, card.level, card.card_id)
 		card_container.add_child(new_card)
