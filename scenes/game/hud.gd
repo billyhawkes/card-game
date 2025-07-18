@@ -1,6 +1,5 @@
 extends VBoxContainer
 
-@onready var stage_label: Label = %StageLabel
 @onready var round_label: Label = %RoundLabel
 @onready var goal_label: Label = %GoalLabel
 @onready var discard_label: Label = %DiscardLabel
@@ -12,7 +11,6 @@ func _ready() -> void:
 	EventBus.round_updated.connect(func(new): round_label.text = "Rounds: " + str(new))
 	EventBus.goal_updated.connect(func(new): goal_label.text = "Goal: " + str(new))
 	EventBus.discard_updated.connect(func(new): discard_label.text = "Discard: " + str(new))
-	EventBus.stage_updated.connect(func(new): stage_label.text = "Stage: " + str(new))
 	EventBus.points_updated.connect(func(new): points_label.text = str(new))
 
 	round_label.text = "Rounds: " + str(Game.max_rounds)

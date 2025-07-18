@@ -24,6 +24,7 @@ func _on_upgrade_card(card_id: int) -> void:
 	cards[card_id].level += 1
 
 func _on_stage_complete() -> void:
+	coins += 5
 	stage += 1
 	get_tree().change_scene_to_packed(SHOP)
 	

@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://d38qjihj04nn7"]
+[gd_scene load_steps=3 format=3 uid="uid://d38qjihj04nn7"]
 
 [ext_resource type="Script" uid="uid://6cfbin7scxk8" path="res://scenes/shop/shop.gd" id="1_lx5au"]
+[ext_resource type="PackedScene" uid="uid://c5aveotrq72su" path="res://scenes/layout/info_header.tscn" id="2_qaxay"]
 
 [node name="Shop" type="CanvasLayer"]
 script = ExtResource("1_lx5au")
@@ -24,9 +25,11 @@ size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 100
 text = "Shop"
 
+[node name="InfoHeader" parent="HUD/VBoxContainer/HBoxContainer" instance=ExtResource("2_qaxay")]
+layout_mode = 2
+
 [node name="StartStageButton" type="Button" parent="HUD/VBoxContainer/HBoxContainer"]
 layout_mode = 2
-size_flags_vertical = 8
 text = "Start Stage"
 
 [node name="Panel" type="Panel" parent="HUD/VBoxContainer"]

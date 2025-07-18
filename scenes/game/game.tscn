@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://b8upd5s60o0j6"]
+[gd_scene load_steps=7 format=3 uid="uid://b8upd5s60o0j6"]
 
 [ext_resource type="Script" uid="uid://cmsh4jlfgpcsl" path="res://scenes/game/game_state.gd" id="1_lfrn8"]
 [ext_resource type="PackedScene" uid="uid://k7sgc6jfye7m" path="res://scenes/menus/deck_menu.tscn" id="2_5i0tg"]
 [ext_resource type="PackedScene" uid="uid://bq7a13i1dlyv6" path="res://scenes/menus/end_menu.tscn" id="3_bdhmt"]
 [ext_resource type="Script" uid="uid://p1nhil2wcyhh" path="res://scenes/game/hud.gd" id="4_87uf6"]
 [ext_resource type="Script" uid="uid://dq1ffuvjirpbu" path="res://scenes/cards/hand_container.gd" id="5_2a8rs"]
+[ext_resource type="PackedScene" uid="uid://c5aveotrq72su" path="res://scenes/layout/info_header.tscn" id="5_5i0tg"]
 
 [node name="Game" type="CanvasLayer"]
 script = ExtResource("1_lfrn8")
@@ -40,14 +41,13 @@ grow_vertical = 2
 theme_override_constants/separation = 20
 script = ExtResource("4_87uf6")
 
-[node name="Header" type="HBoxContainer" parent="HUD"]
+[node name="InfoHeader" parent="HUD" instance=ExtResource("5_5i0tg")]
 layout_mode = 2
 size_flags_horizontal = 4
 
-[node name="StageLabel" type="Label" parent="HUD/Header"]
-unique_name_in_owner = true
+[node name="Header" type="HBoxContainer" parent="HUD"]
 layout_mode = 2
-text = "Stage: 1"
+size_flags_horizontal = 4
 
 [node name="RoundLabel" type="Label" parent="HUD/Header"]
 unique_name_in_owner = true

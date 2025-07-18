@@ -1,0 +1,16 @@
+[gd_scene load_steps=2 format=3 uid="uid://c5aveotrq72su"]
+
+[ext_resource type="Script" uid="uid://bi83tuodqr6p2" path="res://scenes/layout/info_header.gd" id="1_r4ivo"]
+
+[node name="InfoHeader" type="HBoxContainer"]
+offset_right = 320.0
+offset_bottom = 55.0
+script = ExtResource("1_r4ivo")
+
+[node name="StageLabel" type="Label" parent="."]
+layout_mode = 2
+text = "Stage: 0"
+
+[node name="CoinsLabel" type="Label" parent="."]
+layout_mode = 2
+text = "Coins: 0"
