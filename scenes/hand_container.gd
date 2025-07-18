@@ -32,3 +32,4 @@ func get_closest_position_to_cursor() -> int:
 				closest_distance = distance
 				closest_index = index
 	return closest_index
+		

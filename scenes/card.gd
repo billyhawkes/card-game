@@ -29,7 +29,9 @@ func _init(_type: CardType = CardType.Add, _level: int = 1, _card_id: int = 0) -
 func _ready() -> void:
 	value_label.text = label()
 	level_label.text = "Level " + str(level)
-	hand_container = get_parent()
+	var parent = get_parent()
+	if parent.name == "HandContainer":
+		hand_container = parent
 	
 static func create_card(_type: CardType, _level: int, _card_id: int) -> Card:
 	var new_card: Card = CARD.instantiate()
@@ -59,25 +61,9 @@ func label() -> String:
 		_:
 			return ""
 
-func card_action(score: float) -> float:
-	match type:
-		CardType.Add:
-			return score + get_value()
-		CardType.Multiply:
-			return score * get_value()
-		CardType.Upgrade:
-			var cards = hand_container.get_children() as Array[Card]
-			var index = cards.find(self)
-			
-			if len(cards) > index + 1:
-				var next_card = cards[index + 1]
-				EventBus.upgrade_card.emit(next_card.card_id)
-			return score
-		_:
-			return score
-
 func _process(delta: float) -> void:
-	handle_drag(delta)
+	if hand_container:
+		handle_drag(delta)
 	
 func handle_drag(delta: float) -> void:
 	if (is_over or is_dragging) and (hand_container.dragging_card == null or hand_container.dragging_card == self):
@@ -109,7 +95,22 @@ func move_to_rest(delta: float) -> void:
 	if resting_position == global_position:
 		at_rest = true
 		
-	
+func card_action(score: float) -> float:
+	match type:
+		CardType.Add:
+			return score + get_value()
+		CardType.Multiply:
+			return score * get_value()
+		CardType.Upgrade:
+			var cards = hand_container.get_children() as Array[Card]
+			var index = cards.find(self)
+			
+			if len(cards) > index + 1:
+				var next_card = cards[index + 1]
+				EventBus.upgrade_card.emit(next_card.card_id)
+			return score
+		_:
+			return score
 		
 
 func _on_mouse_entered() -> void:

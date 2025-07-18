@@ -2,7 +2,6 @@ extends Node2D
 class_name GameState
 
 @onready var hand_container: Container = %HandContainer
-const CARD = preload("res://scenes/card.tscn")
 
 var stage := 1
 var max_rounds := 5
