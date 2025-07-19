@@ -11,6 +11,7 @@ var coins := 0
 func _ready() -> void:
 	EventBus.stage_complete.connect(_on_stage_complete)
 	EventBus.upgrade_card.connect(_on_upgrade_card)
+	EventBus.buy_card.connect(_on_buy_card)
 	
 	load_cards()
 	
@@ -26,7 +27,13 @@ func _on_upgrade_card(card_id: int, cost: int) -> void:
 		cards[card_id].level += 1
 		coins -= cost
 		EventBus.coins_updated.emit(coins)
-		EventBus.card_updated.emit()
+		EventBus.card_updated.emit(card_id)
+
+func _on_buy_card(type: Card.CardType, level:int, cost: int) -> void:
+	if coins >= cost:
+		coins -= cost
+		cards.append(Card.new(type, level, len(cards) + 1))
+		EventBus.coins_updated.emit(coins)
 
 func _on_stage_complete(rounds: int) -> void:
 	coins += 5 + rounds

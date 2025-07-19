@@ -7,9 +7,13 @@
 script = ExtResource("1_lx5au")
 
 [node name="HUD" type="MarginContainer" parent="."]
-anchors_preset = 15
-anchor_right = 1.0
+custom_minimum_size = Vector2(1440, 0)
+anchors_preset = 13
+anchor_left = 0.5
+anchor_right = 0.5
 anchor_bottom = 1.0
+offset_left = -466.5
+offset_right = 466.5
 grow_horizontal = 2
 grow_vertical = 2
 

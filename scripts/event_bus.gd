@@ -9,7 +9,8 @@ signal play_hand
 
 # Cards
 signal upgrade_card(card_id: int, cost: int)
-signal card_updated
+signal card_updated(card_id: int)
+signal buy_card(type: int, level: int, cost: int)
 
 # Menus
 signal open_deck_menu
