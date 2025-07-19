@@ -11,11 +11,19 @@ func _ready() -> void:
 	EventBus.round_updated.connect(func(new): round_label.text = "Rounds: " + str(new))
 	EventBus.goal_updated.connect(func(new): goal_label.text = "Goal: " + str(new))
 	EventBus.discard_updated.connect(func(new): discard_label.text = "Discard: " + str(new))
-	EventBus.points_updated.connect(func(new): points_label.text = str(new))
+	EventBus.points_updated.connect(_on_points_updated)
 
 	round_label.text = "Rounds: " + str(Game.max_rounds)
 	points_label.text = "0.0"
 	goal_label.text = "Goal: " + str(Game.get_points_goal())
+
+func _on_points_updated(new: float):
+	var tween = get_tree().create_tween()
+	tween.set_trans(Tween.TRANS_SINE)
+	tween.set_ease(Tween.EASE_IN_OUT)
+	tween.tween_property(points_label, "scale", Vector2(1.1, 1.1), 0.1)
+	tween.tween_property(points_label, "scale", Vector2(1.0, 1.0), 0.1)
+	points_label.text = str(new)
 
 func _on_play_button_pressed() -> void:
 	EventBus.play_hand.emit()
