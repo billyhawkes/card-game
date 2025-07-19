@@ -67,7 +67,7 @@ func _on_play_hand() -> void:
 	rounds -= 1
 	points += score
 	if points >= points_goal:
-		EventBus.stage_complete.emit()
+		EventBus.stage_complete.emit(rounds)
 	elif rounds == 0:
 		EventBus.stage_lost.emit()
 	

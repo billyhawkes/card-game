@@ -24,6 +24,12 @@ func _init(_type: CardType = CardType.Add, _level: int = 1, _card_id: int = 0) -
 func _ready() -> void:
 	value_label.text = label()
 	level_label.text = "Level " + str(level)
+	EventBus.card_updated.connect(_on_card_updated)
+	
+func _on_card_updated() -> void:
+	level = Game.cards[card_id].level
+	value_label.text = label()
+	level_label.text = "Level " + str(level)
 	
 static func create_card(_type: CardType, _level: int, _card_id: int) -> Card:
 	var new_card: Card = CARD.instantiate()
@@ -52,3 +58,14 @@ func label() -> String:
 			return "Upgrade"
 		_:
 			return ""
+
+func get_upgrade_cost() -> int:
+	match type:
+		CardType.Add:
+			return 1
+		CardType.Multiply:
+			return 1 + floor(level * 0.1)
+		CardType.Upgrade:
+			return 2 + level * 2
+		_:
+			return 0

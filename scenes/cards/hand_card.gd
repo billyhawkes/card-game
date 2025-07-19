@@ -10,7 +10,6 @@ const HAND_CARD = preload("res://scenes/cards/hand_card.tscn")
 
 func _ready() -> void:
 	hand_container = get_parent()
-	card = get_child(0)
 
 func _process(delta: float) -> void:
 	handle_drag(delta)
@@ -66,7 +65,8 @@ func card_action(score: float) -> float:
 			
 			if len(hand_cards) > index + 1:
 				var next_card = hand_cards[index + 1]
-				EventBus.upgrade_card.emit(next_card.card.card_id)
+				for x in card.level:
+					EventBus.upgrade_card.emit(next_card.card.card_id, 0)
 			return score
 		_:
 			return score
@@ -74,7 +74,6 @@ func card_action(score: float) -> float:
 
 func _on_mouse_entered() -> void:
 	is_over = true
-	print("OVER")
 
 func _on_mouse_exited() -> void:
 	is_over = false

@@ -2,13 +2,14 @@ extends Node2D
 
 # Game
 signal stage_lost
-signal stage_complete
+signal stage_complete(rounds: int)
 
 # HUD
 signal play_hand
 
 # Cards
-signal upgrade_card(card_id: int)
+signal upgrade_card(card_id: int, cost: int)
+signal card_updated
 
 # Menus
 signal open_deck_menu

@@ -20,11 +20,16 @@ func get_points_goal() -> float:
 		goal *= 1.5
 	return goal
 
-func _on_upgrade_card(card_id: int) -> void:
-	cards[card_id].level += 1
+func _on_upgrade_card(card_id: int, cost: int) -> void:
+	var card = cards[card_id]
+	if coins >= cost:
+		cards[card_id].level += 1
+		coins -= cost
+		EventBus.coins_updated.emit(coins)
+		EventBus.card_updated.emit()
 
-func _on_stage_complete() -> void:
-	coins += 5
+func _on_stage_complete(rounds: int) -> void:
+	coins += 5 + rounds
 	stage += 1
 	get_tree().change_scene_to_packed(SHOP)
 	
