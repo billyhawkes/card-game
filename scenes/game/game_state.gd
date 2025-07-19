@@ -6,6 +6,7 @@ var rounds: int
 var points: float
 var points_goal: float
 
+var is_playing_hand = false
 var deck: Array[int] = []
 var discard: Array[int] = []
 var hand: Array[int] = []
@@ -55,24 +56,21 @@ func refresh_hand() -> void:
 	EventBus.deck_updated.emit(len(deck))
 	EventBus.discard_updated.emit(len(discard))
 
-func calculate_hand() -> float:
-	var hand_cards = hand_container.get_children()
-	var score: float = 0.0
-	for card in hand_cards:
-		score = card.card_action(score)
-	return score
-
 func _on_play_hand() -> void:
-	var score = calculate_hand()
-	rounds -= 1
-	points += score
-	if points >= points_goal:
-		EventBus.stage_complete.emit(rounds)
-	elif rounds == 0:
-		EventBus.stage_lost.emit()
-	
-	EventBus.points_updated.emit(points)
-	EventBus.round_updated.emit(rounds)
-	EventBus.goal_updated.emit(points_goal)
-	
-	refresh_hand()
+	if is_playing_hand == false:
+		is_playing_hand = true
+		var hand_cards = hand_container.get_children()
+		for card in hand_cards:
+			var new_points = await card.play_card(points)
+			points = new_points
+			EventBus.points_updated.emit(points)
+		rounds -= 1
+		await get_tree().create_timer(1.0).timeout
+		EventBus.round_updated.emit(rounds)
+		if points >= points_goal:
+			EventBus.stage_complete.emit(rounds)
+		elif rounds == 0:
+			EventBus.stage_lost.emit()
+		
+		refresh_hand()
+		is_playing_hand = false

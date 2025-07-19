@@ -7,6 +7,7 @@ var hand_container: HandContainer
 var at_rest: bool = false
 var card: Card
 const HAND_CARD = preload("res://scenes/cards/hand_card.tscn")
+var modify_resting_postion: Vector2
 
 func _ready() -> void:
 	hand_container = get_parent()
@@ -48,12 +49,15 @@ func handle_drag(delta: float) -> void:
 func move_to_rest(delta: float) -> void:
 	if at_rest == true:
 		return
-	var resting_position = hand_container.get_resting_position(self)
+	var resting_position = hand_container.get_resting_position(self) + modify_resting_postion
 	global_position = lerp(global_position, resting_position, 22 * delta)
 	if resting_position == global_position:
 		at_rest = true
 		
-func card_action(score: float) -> float:
+func play_card(score: float) -> float:
+	modify_resting_postion.y -= 20
+	await get_tree().create_timer(0.5).timeout
+	modify_resting_postion.y += 20
 	match card.type:
 		Card.CardType.Add:
 			return score + card.get_value()
