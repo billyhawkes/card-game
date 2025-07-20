@@ -5,17 +5,21 @@ extends VBoxContainer
 @onready var discard_label: Label = %DiscardLabel
 @onready var deck_label: Label = %DeckLabel
 @onready var points_label: Label = %PointsLabel
+@onready var score_label: Label = $ScoreLabel
 
 func _ready() -> void:
 	EventBus.deck_updated.connect(func(new): deck_label.text = "Deck: " + str(new))
 	EventBus.round_updated.connect(func(new): round_label.text = "Rounds: " + str(new))
 	EventBus.goal_updated.connect(func(new): goal_label.text = "Goal: " + str(new))
+	EventBus.score_updated.connect(func(new): score_label.text = str(new))
 	EventBus.discard_updated.connect(func(new): discard_label.text = "Discard: " + str(new))
 	EventBus.points_updated.connect(_on_points_updated)
 
 	round_label.text = "Rounds: " + str(Game.max_rounds)
-	points_label.text = "0.0"
 	goal_label.text = "Goal: " + str(Game.get_points_goal())
+	points_label.pivot_offset.x = points_label.size.x 
+	points_label.pivot_offset.y = points_label.size.y 
+
 
 func _on_points_updated(new: float):
 	var tween = get_tree().create_tween()

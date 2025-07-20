@@ -19,7 +19,7 @@ func get_points_goal() -> float:
 	var goal = 10.0
 	for x in stage:
 		goal *= 1.5
-	return goal
+	return snapped(goal, 0.1)
 
 func _on_upgrade_card(card_id: int, cost: int) -> void:
 	var card = cards[card_id]
@@ -32,7 +32,7 @@ func _on_upgrade_card(card_id: int, cost: int) -> void:
 func _on_buy_card(type: Card.CardType, level:int, cost: int) -> void:
 	if coins >= cost:
 		coins -= cost
-		cards.append(Card.new(type, level, len(cards) + 1))
+		cards.append(Card.new(type, level, len(cards)))
 		EventBus.coins_updated.emit(coins)
 
 func _on_stage_complete(rounds: int) -> void:

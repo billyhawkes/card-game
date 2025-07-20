@@ -3,8 +3,9 @@ extends CanvasLayer
 @onready var hand_container: Container = %HandContainer
 
 var rounds: int
+var score: float
 var points: float
-var points_goal: float
+var score_goal: float
 
 var is_playing_hand = false
 var deck: Array[int] = []
@@ -15,9 +16,8 @@ func _ready() -> void:
 	EventBus.play_hand.connect(_on_play_hand)
 	
 	rounds = Game.max_rounds
-	points = 0.0
-	points_goal = Game.get_points_goal()
-	print(rounds, points, points_goal)
+	score = 0.0
+	score_goal = Game.get_points_goal()
 	
 	# Fill deck randomly (Should happen at start of round)
 	for index in len(Game.cards):
@@ -62,12 +62,16 @@ func _on_play_hand() -> void:
 		var hand_cards = hand_container.get_children()
 		for card in hand_cards:
 			var new_points = await card.play_card(points)
-			points = new_points
+			points = snapped(new_points, 0.1)
 			EventBus.points_updated.emit(points)
+		score += points
+		points = 0.0
+		EventBus.points_updated.emit(points)
+		EventBus.score_updated.emit(score)
 		rounds -= 1
 		await get_tree().create_timer(1.0).timeout
 		EventBus.round_updated.emit(rounds)
-		if points >= points_goal:
+		if score >= score_goal:
 			EventBus.stage_complete.emit(rounds)
 		elif rounds == 0:
 			EventBus.stage_lost.emit()
