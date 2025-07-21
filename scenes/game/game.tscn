@@ -10,22 +10,6 @@
 [node name="Game" type="CanvasLayer"]
 script = ExtResource("1_lfrn8")
 
-[node name="Menus" type="Control" parent="."]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="DeckMenu" parent="Menus" instance=ExtResource("2_5i0tg")]
-visible = false
-layout_mode = 1
-
-[node name="EndMenu" parent="Menus" instance=ExtResource("3_bdhmt")]
-visible = false
-layout_mode = 1
-
 [node name="HUD" type="VBoxContainer" parent="."]
 anchors_preset = 8
 anchor_left = 0.5
@@ -33,9 +17,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -361.5
-offset_top = -401.5
+offset_top = -487.0
 offset_right = 361.5
-offset_bottom = 401.5
+offset_bottom = 487.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 20
@@ -119,6 +103,12 @@ unique_name_in_owner = true
 visible = false
 layout_mode = 2
 text = "Deck: 5"
+
+[node name="EndMenu" parent="." instance=ExtResource("3_bdhmt")]
+visible = false
+
+[node name="DeckMenu" parent="." instance=ExtResource("2_5i0tg")]
+visible = false
 
 [connection signal="pressed" from="HUD/Footer/PlayButton" to="HUD" method="_on_play_button_pressed"]
 [connection signal="pressed" from="HUD/Footer/DeckButton" to="HUD" method="_on_deck_button_pressed"]

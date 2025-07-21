@@ -71,6 +71,10 @@ func _on_play_hand() -> void:
 		rounds -= 1
 		await get_tree().create_timer(1.0).timeout
 		EventBus.round_updated.emit(rounds)
+		
+		# REMOVE
+		EventBus.stage_lost.emit()
+		
 		if score >= score_goal:
 			EventBus.stage_complete.emit(rounds)
 		elif rounds == 0:

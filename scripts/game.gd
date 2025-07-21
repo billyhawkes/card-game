@@ -16,10 +16,10 @@ func _ready() -> void:
 	load_cards()
 	
 func get_points_goal() -> float:
-	var goal = 10.0
+	var initial_goal = 12.0
 	for x in stage:
-		goal *= 1.5
-	return snapped(goal, 0.1)
+		initial_goal *= 1.5
+	return snapped(initial_goal, 0.1)
 
 func _on_upgrade_card(card_id: int, cost: int) -> void:
 	var card = cards[card_id]

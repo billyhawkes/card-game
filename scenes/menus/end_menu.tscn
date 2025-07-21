@@ -40,23 +40,35 @@ offset_bottom = 50.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="CenterContainer" type="CenterContainer" parent="Background/Panel"]
-custom_minimum_size = Vector2(1080, 580)
-layout_mode = 0
-offset_right = 1080.0
-offset_bottom = 579.0
+[node name="VBoxContainer" type="VBoxContainer" parent="Background/Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -395.0
+offset_top = -199.0
+offset_right = 395.0
+offset_bottom = 199.0
+grow_horizontal = 2
+grow_vertical = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Background/Panel/CenterContainer"]
+[node name="EndLabel" type="Label" parent="Background/Panel/VBoxContainer"]
 layout_mode = 2
-
-[node name="Label" type="Label" parent="Background/Panel/CenterContainer/VBoxContainer"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 130
+theme_override_font_sizes/font_size = 200
 text = "Game Over"
 
-[node name="RestartButton" type="Button" parent="Background/Panel/CenterContainer/VBoxContainer"]
+[node name="StageLabel" type="Label" parent="Background/Panel/VBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
+text = "You made it to stage:"
+horizontal_alignment = 1
+
+[node name="RestartButton" type="Button" parent="Background/Panel/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
 text = "Restart
 "
 
-[connection signal="pressed" from="Background/Panel/CenterContainer/VBoxContainer/RestartButton" to="." method="_on_restart_button_pressed"]
+[connection signal="pressed" from="Background/Panel/VBoxContainer/RestartButton" to="." method="_on_restart_button_pressed"]
