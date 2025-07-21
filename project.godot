@@ -10,10 +10,11 @@ config_version=5
 
 [application]
 
-config/name="Card Game"
-run/main_scene="uid://b8upd5s60o0j6"
+config/name="Combo Corner"
+config/description="Combo Corner is a card game where you upgrade, add, and multiply your cards to get a high score. Build your deck, upgrade your cards, and get to the highest stage possible."
+run/main_scene="uid://b3utiauum1040"
 config/features=PackedStringArray("4.4", "GL Compatibility")
-config/icon="res://icon.svg"
+config/icon="uid://bji0g1xr7ktfr"
 
 [autoload]
 

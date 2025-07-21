@@ -1,8 +1,10 @@
-[gd_scene load_steps=2 format=3 uid="uid://b3utiauum1040"]
+[gd_scene load_steps=3 format=3 uid="uid://b3utiauum1040"]
 
+[ext_resource type="Script" uid="uid://48hhq4wk0ydd" path="res://scenes/menus/main_menu.gd" id="1_ovrgc"]
 [ext_resource type="Theme" uid="uid://ui7apxl85t3v" path="res://interface/theme.tres" id="1_xqga4"]
 
 [node name="CanvasLayer" type="CanvasLayer"]
+script = ExtResource("1_ovrgc")
 
 [node name="Control" type="Control" parent="."]
 layout_mode = 3
@@ -26,7 +28,27 @@ offset_bottom = 45.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Button" type="Button" parent="Control/VBoxContainer"]
+[node name="Label" type="Label" parent="Control/VBoxContainer"]
 layout_mode = 2
+theme_override_font_sizes/font_size = 300
+text = "Combo Corner"
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Control/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="StartButton" type="Button" parent="Control/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
 theme = ExtResource("1_xqga4")
 text = "Start Game"
+
+[node name="QuitButton" type="Button" parent="Control/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("1_xqga4")
+text = "Quit"
+
+[connection signal="pressed" from="Control/VBoxContainer/HBoxContainer/StartButton" to="." method="_on_start_button_pressed"]
+[connection signal="pressed" from="Control/VBoxContainer/HBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]

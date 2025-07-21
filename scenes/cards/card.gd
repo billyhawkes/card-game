@@ -55,7 +55,7 @@ func label() -> String:
 		CardType.Multiply:
 			return "x" + str(get_value())
 		CardType.Upgrade:
-			value_label.add_theme_font_size_override("font_size", 56)
+			value_label.add_theme_font_size_override("font_size", 80)
 			return "Upgrade"
 		_:
 			return ""
