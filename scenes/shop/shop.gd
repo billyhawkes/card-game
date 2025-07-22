@@ -10,7 +10,7 @@ func _ready() -> void:
 		var new_card = ShopCard.create_card(card.type, card.level, card.card_id, ShopCard.ShopType.Upgrade)
 		upgrade_container.add_child(new_card)
 	for x in 5:
-		var type = randi() % 3
+		var type = randi() % len(Card.CardType.keys())
 		var new_card = ShopCard.create_card(type, (randi() % (Game.stage + 1) + 1), -1, ShopCard.ShopType.Buy)
 		buy_container.add_child(new_card)
 

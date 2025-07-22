@@ -4,7 +4,8 @@ class_name Card
 enum CardType {
 	Add,
 	Multiply,
-	Upgrade
+	Upgrade,
+	Coin
 }
 
 var type: CardType
@@ -57,6 +58,8 @@ func label() -> String:
 		CardType.Upgrade:
 			value_label.add_theme_font_size_override("font_size", 80)
 			return "Upgrade"
+		CardType.Coin:
+			return "Coin"
 		_:
 			return ""
 
@@ -68,16 +71,10 @@ func get_upgrade_cost() -> int:
 			return 1 + floor(level * 0.1)
 		CardType.Upgrade:
 			return 2 + level * 2
+		CardType.Coin:
+			return level
 		_:
 			return 0
 
 func get_buy_cost() -> int:
-	match type:
-		CardType.Add:
-			return get_upgrade_cost() * 2
-		CardType.Multiply:
-			return get_upgrade_cost() * 2
-		CardType.Upgrade:
-			return get_upgrade_cost() * 2
-		_:
-			return 0
+	return get_upgrade_cost() * 2

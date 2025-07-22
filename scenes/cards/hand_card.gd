@@ -72,6 +72,10 @@ func play_card(score: float) -> float:
 				for x in card.level:
 					EventBus.upgrade_card.emit(next_card.card.card_id, 0)
 			return score
+		Card.CardType.Coin:
+			Game.coins += card.level
+			EventBus.coins_updated.emit(Game.coins)
+			return score
 		_:
 			return score
 		
