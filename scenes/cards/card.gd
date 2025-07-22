@@ -88,6 +88,8 @@ func get_upgrade_cost() -> int:
 
 func get_buy_cost() -> int:
 	match type:
+		CardType.Coin:
+			return level * 2
 		CardType.ExtraRound:
 			return 15
 		_:
