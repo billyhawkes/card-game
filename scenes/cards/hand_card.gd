@@ -69,8 +69,10 @@ func play_card(score: float) -> float:
 			
 			if len(hand_cards) > index + 1:
 				var next_card = hand_cards[index + 1]
-				for x in card.level:
-					EventBus.upgrade_card.emit(next_card.card.card_id, 0)
+				# Prevent upgrading upgrade card
+				if next_card.card.type != Card.CardType.Upgrade:
+					for x in card.level:
+						EventBus.upgrade_card.emit(next_card.card.card_id, 0)
 			return score
 		Card.CardType.Coin:
 			Game.coins += card.level
