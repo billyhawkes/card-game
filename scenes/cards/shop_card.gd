@@ -17,6 +17,8 @@ var shop_type: ShopType
 func _ready() -> void:
 	match shop_type:
 		ShopType.Upgrade:
+			if card.get_upgrade_cost() == -1:
+				upgrade_button.visible = false
 			buy_button.visible = false
 			upgrade_button.text = str("$", card.get_upgrade_cost())
 		ShopType.Buy:

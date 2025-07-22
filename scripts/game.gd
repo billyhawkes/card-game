@@ -21,6 +21,14 @@ func get_points_goal() -> float:
 		initial_goal *= 1.5
 	return snapped(initial_goal, 0.1)
 
+func get_base_rounds() -> int:
+	# Find extra round cards
+	var extra_rounds = 0
+	for card in cards:
+		if card.type == Card.CardType.ExtraRound:
+			extra_rounds += 1
+	return max_rounds + extra_rounds
+
 func _on_upgrade_card(card_id: int, cost: int) -> void:
 	var card = cards[card_id]
 	if coins >= cost:

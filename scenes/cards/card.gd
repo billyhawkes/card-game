@@ -5,7 +5,8 @@ enum CardType {
 	Add,
 	Multiply,
 	Upgrade,
-	Coin
+	Coin,
+	ExtraRound
 }
 
 var type: CardType
@@ -26,6 +27,12 @@ func _ready() -> void:
 	value_label.text = label()
 	level_label.text = "Level " + str(level)
 	EventBus.card_updated.connect(_on_card_updated)
+	match type:
+		CardType.Upgrade:
+			value_label.add_theme_font_size_override("font_size", 80)
+		CardType.ExtraRound:
+			value_label.add_theme_font_size_override("font_size", 90)
+			level_label.visible = false
 	
 func _on_card_updated(_card_id: int) -> void:
 	if card_id == _card_id:
@@ -56,10 +63,11 @@ func label() -> String:
 		CardType.Multiply:
 			return "x" + str(get_value())
 		CardType.Upgrade:
-			value_label.add_theme_font_size_override("font_size", 80)
 			return "Upgrade"
 		CardType.Coin:
 			return "Coin"
+		CardType.ExtraRound:
+			return "Extra Round"
 		_:
 			return ""
 
@@ -72,9 +80,15 @@ func get_upgrade_cost() -> int:
 		CardType.Upgrade:
 			return 2 + level * 2
 		CardType.Coin:
-			return level
+			return 1 + floor(level * 0.1)
+		CardType.ExtraRound:
+			return -1
 		_:
 			return 0
 
 func get_buy_cost() -> int:
-	return get_upgrade_cost() * 2
+	match type:
+		CardType.ExtraRound:
+			return 15
+		_:
+			return get_upgrade_cost() * 2

@@ -15,7 +15,7 @@ func _ready() -> void:
 	EventBus.discard_updated.connect(func(new): discard_label.text = "Discard: " + str(new))
 	EventBus.points_updated.connect(_on_points_updated)
 
-	round_label.text = "Rounds: " + str(Game.max_rounds)
+	round_label.text = "Rounds: " + str(Game.get_base_rounds())
 	goal_label.text = "Goal: " + str(Game.get_points_goal())
 	points_label.pivot_offset.x = points_label.size.x 
 	points_label.pivot_offset.y = points_label.size.y 

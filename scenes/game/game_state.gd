@@ -14,8 +14,8 @@ var hand: Array[int] = []
 
 func _ready() -> void:
 	EventBus.play_hand.connect(_on_play_hand)
-	
-	rounds = Game.max_rounds
+
+	rounds = Game.get_base_rounds()
 	score = 0.0
 	score_goal = Game.get_points_goal()
 	
