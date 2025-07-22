@@ -80,7 +80,7 @@ func get_upgrade_cost() -> int:
 		CardType.Upgrade:
 			return 2 + level * 2
 		CardType.Coin:
-			return 1 + floor(level * 0.1)
+			return 2 + floor(level * 0.1)
 		CardType.ExtraRound:
 			return -1
 		_:
