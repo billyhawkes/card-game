@@ -52,6 +52,14 @@ func start_game() -> void:
 	get_tree().paused = false
 	get_tree().change_scene_to_packed(GAME)
 
+func restart_game() -> void:
+	cards = []
+	load_cards()
+	stage = 0
+	coins = 0
+	start_game()
+	
+
 func load_cards() -> void:
 	# TODO: Load cards from storage
 	for x in 10:
