@@ -10,4 +10,6 @@ func _open_end_menu() -> void:
 	visible = true
 
 func _on_restart_button_pressed() -> void:
+	Game.cards = []
+	Game.load_cards()
 	Game.start_game()
