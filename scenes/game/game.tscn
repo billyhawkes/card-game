@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://b8upd5s60o0j6"]
+[gd_scene load_steps=9 format=3 uid="uid://b8upd5s60o0j6"]
 
 [ext_resource type="Script" uid="uid://cmsh4jlfgpcsl" path="res://scenes/game/game_state.gd" id="1_lfrn8"]
 [ext_resource type="PackedScene" uid="uid://k7sgc6jfye7m" path="res://scenes/menus/deck_menu.tscn" id="2_5i0tg"]
@@ -6,6 +6,8 @@
 [ext_resource type="Script" uid="uid://p1nhil2wcyhh" path="res://scenes/game/hud.gd" id="4_87uf6"]
 [ext_resource type="Script" uid="uid://dq1ffuvjirpbu" path="res://scenes/cards/hand_container.gd" id="5_2a8rs"]
 [ext_resource type="PackedScene" uid="uid://c5aveotrq72su" path="res://scenes/layout/info_header.tscn" id="5_5i0tg"]
+[ext_resource type="AudioStream" uid="uid://dxamraokxwhdw" path="res://assets/audio/point.wav" id="7_87uf6"]
+[ext_resource type="AudioStream" uid="uid://dibsh561t0l85" path="res://assets/audio/shuffle.wav" id="8_2a8rs"]
 
 [node name="Game" type="CanvasLayer"]
 script = ExtResource("1_lfrn8")
@@ -109,6 +111,14 @@ visible = false
 
 [node name="DeckMenu" parent="." instance=ExtResource("2_5i0tg")]
 visible = false
+
+[node name="Sounds" type="Node" parent="."]
+
+[node name="Point" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource("7_87uf6")
+
+[node name="Shuffle" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource("8_2a8rs")
 
 [connection signal="pressed" from="HUD/Footer/PlayButton" to="HUD" method="_on_play_button_pressed"]
 [connection signal="pressed" from="HUD/Footer/DeckButton" to="HUD" method="_on_deck_button_pressed"]

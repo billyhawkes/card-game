@@ -2,6 +2,7 @@ extends Node2D
 
 const GAME = preload("res://scenes/game/game.tscn")
 const SHOP = preload("res://scenes/shop/shop.tscn")
+const MUSIC = preload("res://assets/audio/music.wav")
 
 var cards: Array[Card] = []
 var stage := 0

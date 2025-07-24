@@ -30,7 +30,9 @@ func _on_points_updated(new: float):
 	points_label.text = str(new)
 
 func _on_play_button_pressed() -> void:
+	GlobalAudio.play_click()
 	EventBus.play_hand.emit()
 
 func _on_deck_button_pressed() -> void:
+	GlobalAudio.play_click()
 	EventBus.open_deck_menu.emit()

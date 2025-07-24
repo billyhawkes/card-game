@@ -27,6 +27,7 @@ static func create_card(card_id: int) -> HandCard:
 func handle_drag(delta: float) -> void:
 	if (is_over or is_dragging) and (hand_container.dragging_card == null or hand_container.dragging_card == self):
 		if Input.is_action_pressed("click"):
+			GlobalAudio.play_click()
 			self.z_index = 1000
 			
 			# Reorder on hover

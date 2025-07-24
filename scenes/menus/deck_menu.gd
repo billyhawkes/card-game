@@ -14,6 +14,7 @@ func _open_deck_menu() -> void:
 	visible = true
 
 func _on_close_button_pressed() -> void:
+	GlobalAudio.play_click()
 	for child in card_container.get_children():
 		card_container.remove_child(child)
 	get_tree().paused = false

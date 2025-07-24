@@ -20,6 +20,7 @@ config/icon="uid://bji0g1xr7ktfr"
 
 EventBus="*res://scripts/event_bus.gd"
 Game="*res://scripts/game.gd"
+GlobalAudio="*res://scenes/audio/global_audio.tscn"
 
 [display]
 

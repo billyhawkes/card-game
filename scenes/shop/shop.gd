@@ -16,4 +16,5 @@ func _ready() -> void:
 
 
 func _on_start_stage_button_pressed() -> void:
+	GlobalAudio.play_click()
 	Game.start_game()

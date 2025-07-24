@@ -11,6 +11,8 @@ var is_playing_hand = false
 var deck: Array[int] = []
 var discard: Array[int] = []
 var hand: Array[int] = []
+@onready var point: AudioStreamPlayer = $Sounds/Point
+@onready var shuffle: AudioStreamPlayer = $Sounds/Shuffle
 
 func _ready() -> void:
 	EventBus.play_hand.connect(_on_play_hand)
@@ -32,6 +34,7 @@ func _ready() -> void:
 # 2. grab from deck
 # 3. if nothing left in deck reshuffle into deck
 func refresh_hand() -> void:
+	shuffle.play()
 	for index in len(hand):
 		var id = hand.pop_front()
 		discard.append(id)
@@ -63,6 +66,7 @@ func _on_play_hand() -> void:
 		for card in hand_cards:
 			var new_points = await card.play_card(points)
 			points = snapped(new_points, 0.1)
+			point.play()
 			EventBus.points_updated.emit(points)
 		score += points
 		points = 0.0

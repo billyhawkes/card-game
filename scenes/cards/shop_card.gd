@@ -37,11 +37,13 @@ static func create_card(_type: Card.CardType, _level: int, _card_id: int, _shop_
 
 
 func _on_upgrade_button_pressed() -> void:
+	GlobalAudio.play_click()
 	EventBus.upgrade_card.emit(card.card_id, card.get_upgrade_cost())
 	upgrade_button.text = str("$", card.get_upgrade_cost())
 
 
 func _on_buy_button_pressed() -> void:
+	GlobalAudio.play_click()
 	var cost = card.get_buy_cost()
 	if Game.coins >= cost:
 		EventBus.buy_card.emit(card.type, card.level, cost)
