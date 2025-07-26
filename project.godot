@@ -13,7 +13,7 @@ config_version=5
 config/name="Combo Corner"
 config/description="Combo Corner is a card game where you upgrade, add, and multiply your cards to get a high score. Build your deck, upgrade your cards, and get to the highest stage possible."
 run/main_scene="uid://b3utiauum1040"
-config/features=PackedStringArray("4.4", "GL Compatibility")
+config/features=PackedStringArray("4.5", "GL Compatibility")
 config/icon="uid://bji0g1xr7ktfr"
 
 [autoload]
@@ -21,6 +21,10 @@ config/icon="uid://bji0g1xr7ktfr"
 EventBus="*res://scripts/event_bus.gd"
 Game="*res://scripts/game.gd"
 GlobalAudio="*res://scenes/audio/global_audio.tscn"
+
+[debug]
+
+gdscript/warnings/unused_signal=0
 
 [display]
 

@@ -31,7 +31,6 @@ func get_base_rounds() -> int:
 	return max_rounds + extra_rounds
 
 func _on_upgrade_card(card_id: int, cost: int) -> void:
-	var card = cards[card_id]
 	if coins >= cost:
 		cards[card_id].level += 1
 		coins -= cost
